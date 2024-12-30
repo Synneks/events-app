@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Grand Prix Monaco 2024",
+    "description": "Experience the thrill of Formula 1 racing in the heart of Monaco!",
+    "price": 1200.00,
+    "totalTickets": 500,
+    "location": "Circuit de Monaco, Monte Carlo",
+    "eventDate": 1729084800000,
+    "userId": "user_2jTYNrQbZWYYgBR3YMRYfnxKtzJ"
+  },
+  {
+    "name": "World Robotics Expo 2024",
+    "description": "Explore the cutting-edge advancements in robotics technology.",
+    "price": 50.00,
+    "totalTickets": 2000,
+    "location": "Tokyo Big Sight, Tokyo",
+    "eventDate": 1726012800000,
+    "userId": "user_2kUZOsRrZYZZhCS4ZNWZgozLtzK"
+  },
+  {
+    "name": "Cannes Film Festival 2024",
+    "description": "Celebrate cinema at the world-famous Cannes Film Festival.",
+    "price": 300.00,
+    "totalTickets": 500,
+    "location": "Palais des Festivals, Cannes",
+    "eventDate": 1725398400000,
+    "userId": "user_2lVAPtSsZZZZiDT5ZOVZhpALuzL"
+  },
+  {
+    "name": "World Cup Final 2024",
+    "description": "Be part of history at the FIFA World Cup Final!",
+    "price": 1500.00,
+    "totalTickets": 800,
+    "location": "Lusail Iconic Stadium, Qatar",
+    "eventDate": 1727731200000,
+    "userId": "user_2mWBQuTtZbYYjEU6ZPWZiqBMvzM"
+  },
+  {
+    "name": "Art Basel Miami Beach 2024",
+    "description": "Discover contemporary art at its finest.",
+    "price": 100.00,
+    "totalTickets": 1000,
+    "location": "Miami Beach Convention Center, Miami",
+    "eventDate": 1729814400000,
+    "userId": "user_2nXCRvUvZcYYkFV7ZQXZjrCNwzN"
+  },
+  {
+    "name": "E3 2024 - Gaming Expo",
+    "description": "The ultimate showcase for the future of gaming.",
+    "price": 85.00,
+    "totalTickets": 5000,
+    "location": "Los Angeles Convention Center, Los Angeles",
+    "eventDate": 1726012800000,
+    "userId": "user_2oYDSwVwZdZZlGW8ZRZZksDOxzO"
+  },
+  {
+    "name": "Cirque du Soleil - Alegría",
+    "description": "An extraordinary blend of circus arts and street entertainment.",
+    "price": 125.00,
+    "totalTickets": 300,
+    "location": "Bellagio Hotel, Las Vegas",
+    "eventDate": 1727222400000,
+    "userId": "user_2pZETxWxZeZZmHX9ZSZZltEPyzP"
+  },
+  {
+    "name": "New York Fashion Week 2024",
+    "description": "Witness the latest trends in high fashion.",
+    "price": 450.00,
+    "totalTickets": 800,
+    "location": "Spring Studios, New York",
+    "eventDate": 1726012800000,
+    "userId": "user_2qAFUyYxZfZZnIY0ZTZZmuFQzzQ"
+  },
+  {
+    "name": "Oktoberfest 2024",
+    "description": "Enjoy authentic German beer, food, and music!",
+    "price": 25.00,
+    "totalTickets": 10000,
+    "location": "Theresienwiese, Munich",
+    "eventDate": 1727222400000,
+    "userId": "user_2rBGVvYyZgZZoJZ1ZUZZnvGRzzR"
+  },
+  {
+    "name": "Super Bowl LVIII",
+    "description": "Catch the biggest football game of the year live!",
+    "price": 2500.00,
+    "totalTickets": 1000,
+    "location": "Caesars Superdome, New Orleans",
+    "eventDate": 1726012800000,
+    "userId": "user_2sCHWzZzZhZZpKZ2ZVZZowHSzzS"
+  },
+  {
+    "name": "Glastonbury Festival 2024",
+    "description": "The world’s most famous music and performing arts festival.",
+    "price": 300.00,
+    "totalTickets": 2000,
+    "location": "Worthy Farm, Somerset",
+    "eventDate": 1726617600000,
+    "userId": "user_2tDIYZdZZqZZqLZ3ZWZZpxITzzT"
+  },
+  {
+    "name": "NBA All-Star Game 2024",
+    "description": "See the best basketball players in the world compete!",
+    "price": 800.00,
+    "totalTickets": 500,
+    "location": "United Center, Chicago",
+    "eventDate": 1726012800000,
+    "userId": "user_2uEJZZeZZsZZrMZ4ZXZZqyJEzzU"
+  },
+  {
+    "name": "Comic-Con International: San Diego",
+    "description": "Dive into the world of comics, movies, and pop culture.",
+    "price": 120.00,
+    "totalTickets": 10000,
+    "location": "San Diego Convention Center, San Diego",
+    "eventDate": 1727222400000,
+    "userId": "user_2vFKaZfZZtZZsNZ5ZYZZrzKFzzV"
+  },
+  {
+    "name": "The Louvre Night Tour",
+    "description": "A guided nighttime experience of the world-famous museum.",
+    "price": 60.00,
+    "totalTickets": 200,
+    "location": "The Louvre, Paris",
+    "eventDate": 1726012800000,
+    "userId": "user_2wGLbZgZZuZZtOZ6ZZZZszLGzzW"
+  },
+  {
+    "name": "Broadway's Phantom of the Opera",
+    "description": "The longest-running Broadway show continues to enchant audiences.",
+    "price": 180.00,
+    "totalTickets": 250,
+    "location": "Majestic Theatre, New York",
+    "eventDate": 1727222400000,
+    "userId": "user_2xHMcZhZZvZZuPZ7ZZZZtzMHzzX"
+  },
+  {
+    "name": "TEDxLondon 2024",
+    "description": "Inspiring talks from thought leaders around the globe.",
+    "price": 100.00,
+    "totalTickets": 800,
+    "location": "The O2, London",
+    "eventDate": 1726012800000,
+    "userId": "user_2yINDZhZZwZZvQZ8ZZZZuzNIzzY"
+  },
+  {
+    "name": "New Year's Eve Ball Drop 2024",
+    "description": "Ring in the New Year at the iconic Times Square celebration.",
+    "price": 2.00,
+    "totalTickets": 100000,
+    "location": "Times Square, New York",
+    "eventDate": 1729987200000,
+    "userId": "user_2zJNEZhZZxZZwRZ9ZZZZvzNJzzZ"
+  },
+  {
+    "name": "Cheese Rolling Festival 2024",
+    "description": "Participate in the thrilling and quirky tradition of cheese rolling!",
+    "price": 15.00,
+    "totalTickets": 2000,
+    "location": "Cooper's Hill, Gloucestershire",
+    "eventDate": 1726012800000,
+    "userId": "user_2aKOFZfZZyZZxSZAZZZZZwzKOzzA"
+  },
+  {
+    "name": "World Science Festival 2024",
+    "description": "Engage with groundbreaking discoveries and scientific innovations.",
+    "price": 75.00,
+    "totalTickets": 1000,
+    "location": "Pier 86, New York",
+    "eventDate": 1726012800000,
+    "userId": "user_2bLPGZhZZzZZyTZBZZZZxzLPzzB"
+  },
+  {
+    "name": "Diwali Lights Festival 2024",
+    "description": "Celebrate the Festival of Lights with music, food, and fireworks.",
+    "price": 20.00,
+    "totalTickets": 5000,
+    "location": "Connaught Place, New Delhi",
+    "eventDate": 1726012800000,
+    "userId": "user_2cMQHZhZZ0ZZzUZCZZZZyzMQzzC"
+  }
+]
