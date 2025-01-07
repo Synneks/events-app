@@ -1,7 +1,11 @@
+import EventList from "@/components/EventList";
+
 export default function Home() {
   return (
     <div>
-      <main>Welcome to Events</main>
+      <main>
+        <EventList />
+      </main>
       <footer></footer>
     </div>
   );
