@@ -5,14 +5,15 @@ import { Id } from "../../convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { CalendarDays, MapPin, StarIcon } from "lucide-react";
+import { CalendarDays, MapPin, StarIcon, Ticket } from "lucide-react";
 
 function EventCard({ eventId }: { eventId: Id<"events"> }) {
   const { user } = useUser();
   const router = useRouter();
   const event = useQuery(api.events.getById, { eventId });
+  const availability = useQuery(api.events.getEventAvailability, { eventId });
 
-  if (!event) {
+  if (!event || !availability) {
     return null;
   }
 
@@ -47,12 +48,17 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
           </div>
 
           {/* Price */}
-          <div className="ml-4 flex flex-col items-end justify-center">
+          <div className="ml-4 flex flex-col items-end justify-center gap-2">
             <span
               className={`rounded-full px-4 py-1.5 font-semibold ${isPastEvent ? "bg-gray-100 text-gray-500" : "bg-green-100 text-green-700"}`}
             >
               ${event.price.toFixed(2)}
             </span>
+            {availability.purchasedCount >= availability.totalTickets && (
+              <span className="text-nowrap rounded-full bg-red-100 px-4 py-1.5 text-sm font-semibold text-red-700">
+                Sold Out
+              </span>
+            )}
           </div>
         </div>
 
@@ -68,6 +74,21 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
             <span>
               {new Date(event.eventDate).toLocaleDateString()}
               {isPastEvent && " (Ended)"}
+            </span>
+          </div>
+
+          <div className="flex items-center text-gray-600">
+            <Ticket className="mr-2 h-4 w-4" />
+            <span>
+              {availability.totalTickets - availability.purchasedCount}/
+              {availability.totalTickets} tickets left
+              {!isPastEvent && availability.activeOffers > 0 && (
+                <span className="ml-2 text-sm text-amber-600">
+                  ({availability.activeOffers}){" "}
+                  {availability.activeOffers === 1 ? "person" : "people"} trying
+                  to buy)
+                </span>
+              )}
             </span>
           </div>
 
