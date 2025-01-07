@@ -43,12 +43,12 @@ function Header() {
           <SignedIn>
             <div className="flex items-center gap-3">
               <Link href="/seller">
-                <button className="rounded-lg bg-yellow-400 px-3 py-1.5 text-sm transition duration-200 ease-in hover:bg-yellow-500">
+                <button className="whitespace-nowrap rounded-lg bg-yellow-400 px-3 py-1.5 text-sm transition duration-200 ease-in hover:bg-yellow-500">
                   Sell Tickets
                 </button>
               </Link>
               <Link href="/tickets">
-                <button className="rounded-lg border border-gray-300 bg-gray-100 px-3 py-1.5 text-sm transition duration-200 ease-in hover:bg-gray-200">
+                <button className="whitespace-nowrap rounded-lg border border-gray-300 bg-gray-100 px-3 py-1.5 text-sm transition duration-200 ease-in hover:bg-gray-200">
                   My Tickets
                 </button>
               </Link>
