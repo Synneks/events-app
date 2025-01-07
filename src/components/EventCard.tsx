@@ -8,11 +8,15 @@ import { api } from "../../convex/_generated/api";
 import {
   CalendarDays,
   Check,
+  CircleArrowRight,
+  LoaderCircle,
   MapPin,
   PencilIcon,
   StarIcon,
   Ticket,
+  XCircle,
 } from "lucide-react";
+import { WAITING_LIST_STATUS } from "../../convex/constants";
 
 function EventCard({ eventId }: { eventId: Id<"events"> }) {
   const { user } = useUser();
@@ -24,12 +28,64 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
     userId: user?.id ?? "",
   });
 
+  const queuePosition = useQuery(api.waitingList.getQueuePosition, {
+    eventId,
+    userId: user?.id ?? "",
+  });
+
   if (!event || !availability) {
     return null;
   }
 
   const isPastEvent = event.eventDate < Date.now();
   const isEventOwner = user?.id === event.userId;
+
+  const renderQueuePosition = () => {
+    if (
+      !queuePosition ||
+      queuePosition.status !== WAITING_LIST_STATUS.WAITING
+    ) {
+      return null;
+    }
+
+    if (availability.purchasedCount >= availability.totalTickets) {
+      return (
+        <div className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 p-3">
+          <div className="flex items-center">
+            <Ticket className="mr-2 h-4 w-4 text-gray-600" />
+            <span className="text-gray-600">Event is sold out</span>
+          </div>
+        </div>
+      );
+    }
+
+    if (queuePosition.position === 2) {
+      <div className="flex flex-col items-center justify-between rounded-lg border border-red-100 bg-red-50 p-3 lg:flex-row">
+        <div className="flex items-center">
+          <CircleArrowRight className="text-red-500-mr-2 h-4 w-4" />
+          <span className="text-red-700">
+            You&apos;re next in line! (Queue position: {queuePosition.position})
+          </span>
+        </div>
+        <div className="flex items-center">
+          <LoaderCircle className="mr-1 h-4 w-4 animate-spin to-red-500" />
+          <span className="text-sm text-red-600">Waiting for ticket</span>
+        </div>
+      </div>;
+    }
+
+    return (
+      <div>
+        <div>
+          <LoaderCircle className="mr-1 h-4 w-4 animate-spin to-amber-500" />
+          <span className="text-sm text-amber-600">Queue position</span>
+        </div>
+        <span className="rounded-full bg-yellow-100 px-3 py-1 text-yellow-700">
+          #{queuePosition.position}
+        </span>
+      </div>
+    );
+  };
 
   const renderTicketStatus = () => {
     if (!user) {
@@ -60,6 +116,24 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
           <button onClick={() => router.push(`/tickets/${userTicket._id}`)}>
             View your ticket
           </button>
+        </div>
+      );
+    }
+
+    if (queuePosition) {
+      return (
+        <div>
+          {queuePosition?.status === WAITING_LIST_STATUS.OFFERED && (
+            <button>Purchase Ticket</button>
+          )}
+          {renderQueuePosition()}
+          {queuePosition.status === WAITING_LIST_STATUS.EXPIRED && (
+            <div className="rounded-lg border border-red-100 bg-red-50 p-3">
+              <span className="flex items-center text-red-700">
+                <XCircle className="h-4 w-4" /> Offer expired
+              </span>
+            </div>
+          )}
         </div>
       );
     }
