@@ -5,13 +5,24 @@ import { Id } from "../../convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
-import { CalendarDays, MapPin, StarIcon, Ticket } from "lucide-react";
+import {
+  CalendarDays,
+  Check,
+  MapPin,
+  PencilIcon,
+  StarIcon,
+  Ticket,
+} from "lucide-react";
 
 function EventCard({ eventId }: { eventId: Id<"events"> }) {
   const { user } = useUser();
   const router = useRouter();
   const event = useQuery(api.events.getById, { eventId });
   const availability = useQuery(api.events.getEventAvailability, { eventId });
+  const userTicket = useQuery(api.tickets.getUserTicketForEvent, {
+    eventId,
+    userId: user?.id ?? "",
+  });
 
   if (!event || !availability) {
     return null;
@@ -19,6 +30,40 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
 
   const isPastEvent = event.eventDate < Date.now();
   const isEventOwner = user?.id === event.userId;
+
+  const renderTicketStatus = () => {
+    if (!user) {
+      return null;
+    }
+
+    if (isEventOwner) {
+      return (
+        <div className="mt-4">
+          <button
+            onClick={() => router.push(`/seller/event/${eventId}/edit`)}
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-gray-100 px-6 py-3 text-gray-600 shadow-md transition duration-200 ease-in hover:bg-gray-200"
+          >
+            <PencilIcon className="h-4 w-4" />
+            Edit Event
+          </button>
+        </div>
+      );
+    }
+
+    if (userTicket) {
+      return (
+        <div className="mt-4 flex items-center justify-between rounded-lg border border-green-200 bg-green-100 p-3">
+          <div className="flex items-center">
+            <Check className="mr-2 h-4 w-4 text-green-600" />
+            <span className="text-green-700">You have a ticket!</span>
+          </div>
+          <button onClick={() => router.push(`/tickets/${userTicket._id}`)}>
+            View your ticket
+          </button>
+        </div>
+      );
+    }
+  };
 
   return (
     <div
@@ -95,6 +140,9 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
           <p className="mt-4 line-clamp-2 text-sm text-gray-600">
             {event.description}
           </p>
+          <div onClick={(e) => e.stopPropagation()}>
+            {!isPastEvent && renderTicketStatus()}
+          </div>
         </div>
       </div>
     </div>
