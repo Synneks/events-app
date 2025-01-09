@@ -1,10 +1,10 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import { Id } from "../../convex/_generated/dataModel";
+import { Id } from "@convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
 import { useQuery } from "convex/react";
-import { api } from "../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import {
   CalendarDays,
   Check,
@@ -16,7 +16,8 @@ import {
   Ticket,
   XCircle,
 } from "lucide-react";
-import { WAITING_LIST_STATUS } from "../../convex/constants";
+import { WAITING_LIST_STATUS } from "@convex/constants";
+import PurchaseTicket from "./PurchaseTicket";
 
 function EventCard({ eventId }: { eventId: Id<"events"> }) {
   const { user } = useUser();
@@ -41,10 +42,7 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
   const isEventOwner = user?.id === event.userId;
 
   const renderQueuePosition = () => {
-    if (
-      !queuePosition ||
-      queuePosition.status !== WAITING_LIST_STATUS.WAITING
-    ) {
+    if (!queuePosition || queuePosition.status !== WAITING_LIST_STATUS.WAITING) {
       return null;
     }
 
@@ -63,9 +61,7 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
       <div className="flex flex-col items-center justify-between rounded-lg border border-red-100 bg-red-50 p-3 lg:flex-row">
         <div className="flex items-center">
           <CircleArrowRight className="text-red-500-mr-2 h-4 w-4" />
-          <span className="text-red-700">
-            You&apos;re next in line! (Queue position: {queuePosition.position})
-          </span>
+          <span className="text-red-700">You&apos;re next in line! (Queue position: {queuePosition.position})</span>
         </div>
         <div className="flex items-center">
           <LoaderCircle className="mr-1 h-4 w-4 animate-spin to-red-500" />
@@ -80,9 +76,7 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
           <LoaderCircle className="mr-1 h-4 w-4 animate-spin to-amber-500" />
           <span className="text-sm text-amber-600">Queue position</span>
         </div>
-        <span className="rounded-full bg-yellow-100 px-3 py-1 text-yellow-700">
-          #{queuePosition.position}
-        </span>
+        <span className="rounded-full bg-yellow-100 px-3 py-1 text-yellow-700">#{queuePosition.position}</span>
       </div>
     );
   };
@@ -113,19 +107,17 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
             <Check className="mr-2 h-4 w-4 text-green-600" />
             <span className="text-green-700">You have a ticket!</span>
           </div>
-          <button onClick={() => router.push(`/tickets/${userTicket._id}`)}>
-            View your ticket
-          </button>
+          <button onClick={() => router.push(`/tickets/${userTicket._id}`)}>View your ticket</button>
         </div>
       );
     }
 
+    console.log(queuePosition);
+
     if (queuePosition) {
       return (
         <div>
-          {queuePosition?.status === WAITING_LIST_STATUS.OFFERED && (
-            <button>Purchase Ticket</button>
-          )}
+          {queuePosition.status === WAITING_LIST_STATUS.OFFERED && <PurchaseTicket eventId={eventId} />}
           {renderQueuePosition()}
           {queuePosition.status === WAITING_LIST_STATUS.EXPIRED && (
             <div className="rounded-lg border border-red-100 bg-red-50 p-3">
@@ -144,9 +136,7 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
       onClick={() => router.push(`/event/${eventId}`)}
       className={`bg-white-100 cursor-pointer rounded-xl border border-yellow-400 shadow-md transition duration-200 ease-in hover:shadow-lg ${isPastEvent ? "opacity-75 hover:opacity-100" : ""}`}
     >
-      <div className="flex h-48 items-center justify-center bg-orange-200">
-        This will be an image!
-      </div>
+      <div className="flex h-48 items-center justify-center bg-orange-200">This will be an image!</div>
 
       <div className={`p-4`}>
         <div className="flex justify-between">
@@ -199,24 +189,18 @@ function EventCard({ eventId }: { eventId: Id<"events"> }) {
           <div className="flex items-center text-gray-600">
             <Ticket className="mr-2 h-4 w-4" />
             <span>
-              {availability.totalTickets - availability.purchasedCount}/
-              {availability.totalTickets} tickets left
+              {availability.totalTickets - availability.purchasedCount}/{availability.totalTickets} tickets left
               {!isPastEvent && availability.activeOffers > 0 && (
                 <span className="ml-2 text-sm text-amber-600">
-                  ({availability.activeOffers}){" "}
-                  {availability.activeOffers === 1 ? "person" : "people"} trying
-                  to buy)
+                  ({availability.activeOffers}
+                  {availability.activeOffers === 1 ? " person" : " people"} trying to buy)
                 </span>
               )}
             </span>
           </div>
 
-          <p className="mt-4 line-clamp-2 text-sm text-gray-600">
-            {event.description}
-          </p>
-          <div onClick={(e) => e.stopPropagation()}>
-            {!isPastEvent && renderTicketStatus()}
-          </div>
+          <p className="mt-4 line-clamp-2 text-sm text-gray-600">{event.description}</p>
+          <div onClick={(e) => e.stopPropagation()}>{!isPastEvent && renderTicketStatus()}</div>
         </div>
       </div>
     </div>
