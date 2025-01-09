@@ -2,13 +2,16 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
+import { useRouter } from "next/navigation";
 import { Id } from "@convex/_generated/dataModel";
 import { api } from "@convex/_generated/api";
 import { useEffect, useState } from "react";
 import { WAITING_LIST_STATUS } from "@convex/constants";
 import { Ticket } from "lucide-react";
+import ReleaseTicket from "@components/ReleaseTicket";
 
 function PurchaseTicket({ eventId }: { eventId: Id<"events"> }) {
+  const router = useRouter();
   const { user } = useUser();
   const queuePosition = useQuery(api.waitingList.getQueuePosition, {
     eventId,
@@ -83,6 +86,9 @@ function PurchaseTicket({ eventId }: { eventId: Id<"events"> }) {
         >
           {isLoading ? "Redirecting to checkout..." : "Purchase Ticket Now"}
         </button>
+        <div className="mt-4">
+          <ReleaseTicket eventId={eventId} waitingListId={queuePosition._id} />
+        </div>
       </div>
     </div>
   );
